@@ -63,3 +63,18 @@ export const paginate = (items, currentPage, pageSize) => {
   const startIndex = (currentPage - 1) * pageSize;
   return items.slice(startIndex, startIndex + pageSize);
 };
+
+export const getTrendChartData = (trendData) => [
+  ["Month", "Billed", "Received"],
+  ...trendData.map((entry) => [entry.month, entry.billed, entry.received]),
+];
+
+export const getOutStandingChartData = (outstandingByProject) => [
+  ["Project", "Outstanding", { role: "style" }, { role: "tooltip" }],
+  ...outstandingByProject.map((item) => [
+    item.projectName,
+    item.value,
+    "#1f4b99",
+    `${item.projectName}: ${formatCurrency(item.value)}`,
+  ]),
+];
